@@ -23,12 +23,9 @@ Jota News automatically processes news articles through a complete pipeline:
 
 ```bash
 # Clone and start
-git clone <repository-url>
+git clone https://github.com/wilsonricardopereirasilveira/jota_news.git
 cd jota_news
 docker-compose up --build -d
-
-# Test the application
-curl http://localhost:8000/test/news/
 ```
 
 ### Local Development
@@ -258,19 +255,6 @@ curl http://localhost:8000/api/tags/1/news/
 ```bash
 # System stats
 curl http://localhost:8000/api/stats/
-```
-
-### Test Endpoints (Development)
-
-```bash
-# All processed news (no auth required)
-curl http://localhost:8000/test/news/
-
-# Urgent news only
-curl http://localhost:8000/test/urgent/
-
-# Categories with counts
-curl http://localhost:8000/test/categories/
 ```
 
 ### API Response Format
@@ -525,7 +509,6 @@ jota_news/
 - **Webhook**: `POST /api/webhook/news/`
 - **News API**: `GET /api/news/`
 - **Categories**: `GET /api/categories/`
-- **Test Endpoints**: `GET /test/news/`
 - **Health Check**: `GET /health/live/`
 
 ## Contributing
@@ -533,7 +516,7 @@ jota_news/
 ### Setup
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/wilsonricardopereirasilveira/jota_news.git
 cd jota_news
 python -m venv venv
 source venv/bin/activate
