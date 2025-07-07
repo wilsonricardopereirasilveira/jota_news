@@ -1,0 +1,5 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation stack for Jota News infrastructure
+Resources:
+  Placeholder:
+    Type: AWS::CloudFormation::WaitConditionHandle

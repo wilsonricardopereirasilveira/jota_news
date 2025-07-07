@@ -1,0 +1,19 @@
+{
+  "widgets": [
+    {
+      "type": "metric",
+      "title": "API Requests per Minute",
+      "metrics": ["AWS/ApplicationELB", "RequestCount"]
+    },
+    {
+      "type": "metric",
+      "title": "News Processing Rate",
+      "metrics": ["Custom/JotaNews", "NewsProcessed"]
+    },
+    {
+      "type": "log",
+      "title": "Recent Errors",
+      "query": "fields @timestamp, @message | filter @message like /ERROR/"
+    }
+  ]
+}

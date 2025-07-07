@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Lambda processor for news classification
+
+Resources:
+  NewsProcessorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_processor.lambda_function.lambda_handler
+      Runtime: python3.9
+      Timeout: 30
+      MemorySize: 128
+      CodeUri: .
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AWSLambdaVPCAccessExecutionRole
+      Events:
+        SQSTrigger:
+          Type: SQS
+          Properties:
+            Queue: !Ref NewsQueue
+
+  NewsQueue:
+    Type: AWS::SQS::Queue

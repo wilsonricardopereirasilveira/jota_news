@@ -1,0 +1,4 @@
+FROM public.ecr.aws/lambda/python:3.9
+COPY ../../lambda_processor ./
+RUN pip install --no-cache-dir -r lambda_processor/requirements.txt -t .
+CMD ["lambda_processor.lambda_function.lambda_handler"]

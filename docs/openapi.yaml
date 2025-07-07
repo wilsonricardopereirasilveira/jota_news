@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Jota News API
+  version: 1.0.0
+paths:
+  /api/news/:
+    get:
+      summary: List news articles
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                count: 1
+                results: []
+  /api/token/:
+    post:
+      summary: Obtain JWT access and refresh tokens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Tokens obtained
+  /api/token/refresh/:
+    post:
+      summary: Refresh JWT access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh:
+                  type: string
+      responses:
+        '200':
+          description: Token refreshed

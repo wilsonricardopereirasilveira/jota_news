@@ -1,0 +1,11 @@
+version: '3'
+services:
+  api:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/Dockerfile.api
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=jota_news.settings.production
+      - DB_SECRET=/aws/ssm/db

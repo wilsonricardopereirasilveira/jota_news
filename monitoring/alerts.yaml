@@ -1,0 +1,13 @@
+alerts:
+  - name: "High Error Rate"
+    condition: "error_rate > 5%"
+    threshold: "5 minutes"
+  - name: "Database Connection Issues"
+    condition: "db_connections_failed > 10"
+    threshold: "2 minutes"
+  - name: "Lambda Function Errors"
+    condition: "lambda_errors > 5"
+    threshold: "1 minute"
+  - name: "SQS DLQ Messages"
+    condition: "dlq_messages > 0"
+    threshold: "immediate"

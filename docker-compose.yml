@@ -1,0 +1,86 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: jota_news
+      POSTGRES_USER: jota
+      POSTGRES_PASSWORD: jota
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jota -d jota_news"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+
+  web:
+    build: .
+    restart: always
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DJANGO_SETTINGS_MODULE: jota_news.settings.development
+      DJANGO_SECRET_KEY: docker-secret-key-super-secure
+      DJANGO_DEBUG: "True"
+      DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1,0.0.0.0"
+
+      # Database
+      POSTGRES_DB: jota_news
+      POSTGRES_USER: jota
+      POSTGRES_PASSWORD: jota
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+
+      # Redis/Cache
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+
+      # Webhook
+      WEBHOOK_API_KEY: teste-api-key
+
+    command: >
+      sh -c "
+        echo '🔄 Aguardando banco de dados...' &&
+        python manage.py migrate --noinput &&
+        echo '📊 Carregando dados iniciais...' &&
+        python manage.py loaddata fixtures/initial_categories.json || echo 'Fixtures já carregadas ou não encontradas' &&
+        echo '🚀 Iniciando servidor...' &&
+        python manage.py runserver 0.0.0.0:8000
+      "
+
+  celery:
+    build: .
+    restart: always
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis
+    environment:
+      DJANGO_SETTINGS_MODULE: jota_news.settings.development
+      POSTGRES_DB: jota_news
+      POSTGRES_USER: jota
+      POSTGRES_PASSWORD: jota
+      POSTGRES_HOST: db
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+    command: celery -A jota_news worker -l info
+
+volumes:
+  postgres_data:

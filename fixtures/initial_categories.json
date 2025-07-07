@@ -1,0 +1,96 @@
+[
+  {
+    "model": "categories.category",
+    "pk": 1,
+    "fields": {
+      "name": "Poder",
+      "slug": "poder",
+      "description": "Notícias sobre os três poderes: Executivo, Legislativo e Judiciário",
+      "created_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": 2,
+    "fields": {
+      "name": "Tributos",
+      "slug": "tributos",
+      "description": "Notícias sobre tributação, impostos e questões fiscais",
+      "created_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": 3,
+    "fields": {
+      "name": "Saúde",
+      "slug": "saude",
+      "description": "Notícias sobre saúde pública, SUS e vigilância sanitária",
+      "created_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": 4,
+    "fields": {
+      "name": "Trabalhista",
+      "slug": "trabalhista",
+      "description": "Notícias sobre direito do trabalho, CLT e relações trabalhistas",
+      "created_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": 5,
+    "fields": {
+      "name": "Outros",
+      "slug": "outros",
+      "description": "Outras notícias não categorizadas",
+      "created_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "categories.subcategory",
+    "pk": 1,
+    "fields": {
+      "category": 2,
+      "name": "Aposta da Semana",
+      "slug": "aposta-da-semana",
+      "description": "Análises semanais sobre questões tributárias",
+      "created_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "categories.subcategory",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "name": "STF",
+      "slug": "stf",
+      "description": "Decisões e notícias do Supremo Tribunal Federal",
+      "created_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "categories.subcategory",
+    "pk": 3,
+    "fields": {
+      "category": 1,
+      "name": "Executivo",
+      "slug": "executivo",
+      "description": "Notícias sobre o Poder Executivo",
+      "created_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "categories.subcategory",
+    "pk": 4,
+    "fields": {
+      "category": 1,
+      "name": "Legislativo",
+      "slug": "legislativo",
+      "description": "Notícias sobre Congresso, Senado e Câmara",
+      "created_at": "2024-01-01T00:00:00Z"
+    }
+  }
+]
